@@ -10,7 +10,7 @@ export class UserService{
         @InjectRepository(User) private UserRepository: Repository<User>,
     ){}
 
-    // create a new user
+  // create a new user
   async create(entity: DeepPartial<User>): Promise<boolean> {
     const res = await this.UserRepository.insert(entity);
     if (res && res.raw.affectedRows > 0) {
@@ -19,5 +19,31 @@ export class UserService{
     return false;
   }
 
-  
+  // use id to find a user
+  async find(id: string): Promise<User> {
+    const res = await this.UserRepository.findOne({
+      where: {
+        id,
+      },
+    });
+    return res;
+  }
+
+ // delete a user
+  async del(id: string): Promise<boolean> {
+    const res = await this.UserRepository.delete(id);
+    if (res.affected > 0) {
+      return true;
+    }
+    return false;
+  } 
+
+  // update user's info
+  async update(id: string, entity: DeepPartial<User>): Promise<boolean> {
+    const res = await this.UserRepository.update(id, entity);
+    if (res.affected > 0) {
+      return true;
+    }
+    return false;
+  }
 }

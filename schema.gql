@@ -1,0 +1,55 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserType {
+  id: String!
+
+  """nickname"""
+  name: String!
+
+  """description"""
+  desc: String!
+
+  """user account"""
+  account: String!
+
+  """user password"""
+  password: String!
+
+  """profile photo"""
+  avatar: String
+}
+
+type Result {
+  code: Int!
+  message: String
+  data: String
+}
+
+type Query {
+  """use id to find a user"""
+  find(id: String!): UserType!
+}
+
+type Mutation {
+  """create a new user"""
+  create(params: UserInput!): Boolean!
+
+  """更新用户"""
+  updateUserInfo(id: String!, params: UserInput!): Result!
+
+  """删除一个用户"""
+  del(id: String!): Boolean!
+}
+
+input UserInput {
+  """nickname"""
+  name: String!
+
+  """brief introduction"""
+  desc: String!
+
+  """profile photo"""
+  avatar: String!
+}

@@ -1,11 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
 import { UserService } from './modules/user/user.service';
 
 @Controller()
 export class AppController {
   constructor(private readonly userService:UserService){}
 
+  //create a administer for test
   @Get('/create')
   async create():Promise<boolean>{
     return await this.userService.create({
