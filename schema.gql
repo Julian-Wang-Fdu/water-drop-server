@@ -27,19 +27,42 @@ type Result {
   data: String
 }
 
+type OSSType {
+  """expiration time"""
+  expire: String!
+
+  """strategy"""
+  policy: String!
+
+  """sign"""
+  signature: String!
+
+  """key"""
+  accessId: String!
+
+  """host"""
+  host: String!
+
+  """folder"""
+  dir: String!
+}
+
 type Query {
   """use id to find a user"""
   find(id: String!): UserType!
+
+  """get oss info"""
+  getOSSInfo: OSSType!
 }
 
 type Mutation {
   """create a new user"""
   create(params: UserInput!): Boolean!
 
-  """更新用户"""
+  """update a user information"""
   updateUserInfo(id: String!, params: UserInput!): Result!
 
-  """删除一个用户"""
+  """delete a user"""
   del(id: String!): Boolean!
 }
 
