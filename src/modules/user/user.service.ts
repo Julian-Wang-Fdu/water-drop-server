@@ -28,6 +28,16 @@ export class UserService{
     });
     return res;
   }
+  
+  //checkout whether an account is already exist
+  async findByAccount(account:string): Promise<User>{
+    const res = await this.UserRepository.findOne({
+      where: {
+        account,
+      },
+    });
+    return res;
+  }
 
  // delete a user
   async del(id: string): Promise<boolean> {

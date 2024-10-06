@@ -1,2 +1,9 @@
 export const SUCCESS = 200;
+export const CREATE_ACCOUNT_FAIL = 555;
+export const NOT_ENOUGH_LENGTH = 666;
+export const TOO_LONG = 888;
+export const USER_EXIST = 10001;
 export const UPDATE_ERROR = 10002;
+export const LOGIN_ERROR = 10006;
+export const NOT_EMPTY = 10010;
+export const VALIDATE_ERROR = 10011;

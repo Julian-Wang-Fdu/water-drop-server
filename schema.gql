@@ -64,6 +64,9 @@ type Mutation {
 
   """delete a user"""
   del(id: String!): Boolean!
+
+  """login or register"""
+  login(account: String!, password: String!): Result!
 }
 
 input UserInput {
