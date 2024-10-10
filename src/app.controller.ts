@@ -7,7 +7,7 @@ export class AppController {
 
   //create a administer for test
   @Get('/create')
-  async create():Promise<boolean>{
+  async create():Promise<string>{
     return await this.userService.create({
       name:'水滴超级管理员',
       desc: '管理员',

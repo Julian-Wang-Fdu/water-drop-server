@@ -10,13 +10,13 @@ export class UserService{
         @InjectRepository(User) private UserRepository: Repository<User>,
     ){}
 
-  // create a new user
-  async create(entity: DeepPartial<User>): Promise<boolean> {
+  // create a new user and return user id
+  async create(entity: DeepPartial<User>): Promise<string> {
     const res = await this.UserRepository.insert(entity);
     if (res && res.raw.affectedRows > 0) {
-      return true;
+      return res.identifiers[0].id;
     }
-    return false;
+    return "false";
   }
 
   // use id to find a user

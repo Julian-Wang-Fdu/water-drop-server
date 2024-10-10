@@ -4,13 +4,16 @@ import { UserInput } from "./dto/user-input";
 import { UserType } from "./dto/user.type";
 import { SUCCESS, UPDATE_ERROR } from "src/common/constants/code";
 import { Result } from "src/common/dto/result.type";
+import { UseGuards } from "@nestjs/common";
+import { GqlAuthGuard } from "src/guards/auth.guard";
 
 @Resolver()
+@UseGuards(GqlAuthGuard)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Mutation(() => Boolean, { description: 'create a new user' })
-  async create(@Args('params') params: UserInput): Promise<boolean> {
+  async create(@Args('params') params: UserInput): Promise<string> {
     return await this.userService.create(params);
   }
 

@@ -4,11 +4,15 @@ import { Result } from "src/common/dto/result.type";
 import { accountAndPwdValidate } from "src/utils";
 import { CREATE_ACCOUNT_FAIL, LOGIN_ERROR, SUCCESS } from "src/common/constants/code";
 import * as md5 from 'md5';
+import { JwtService } from "@nestjs/jwt";
 
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly jwtService: JwtService
+) {}
 
   async login(account:string,password:string): Promise<Result> {
     const result = accountAndPwdValidate(account, password);
@@ -23,9 +27,11 @@ export class AuthService {
             password: md5(password)
         });
         if(res){
+            const token = this.jwtService.sign({res})
             return{
                 code: SUCCESS,
-                message: 'Create account success'
+                message: 'Create account success',
+                data: token
             }
         }
         return{
@@ -34,9 +40,11 @@ export class AuthService {
         }
     }
     if(user.password == md5(password)){
+        const token = this.jwtService.sign({id:user.id})
         return{
             code: SUCCESS,
-            message: 'Login success'
+            message: 'Login success',
+            data: token
         }
     }
     return {
