@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
+import { Args, Context, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { UserService } from "./user.service";
 import { UserInput } from "./dto/user-input";
 import { UserType } from "./dto/user.type";
@@ -21,7 +21,13 @@ export class UserResolver {
   async find(@Args('id') id: string): Promise<UserType> {
     return await this.userService.find(id);
   }
-  
+ 
+   @Query(() => UserType, { description: 'use id to find a user' })
+  async getUserInfo(@Context() cxt:any):Promise<UserType>{
+    const id = cxt.req.user.id
+    return await this.userService.find(id)
+  }
+
   @Mutation(() => Result, { description: 'update a user information' })
   async updateUserInfo(
     @Args('id') id: string,

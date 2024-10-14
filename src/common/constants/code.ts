@@ -7,3 +7,6 @@ export const UPDATE_ERROR = 10002;
 export const LOGIN_ERROR = 10006;
 export const NOT_EMPTY = 10010;
 export const VALIDATE_ERROR = 10011;
+export const ORG_NOT_EXIST = 10013;
+export const ORG_FAIL = 10014;
+export const ORG_DEL_FAIL = 10015;
