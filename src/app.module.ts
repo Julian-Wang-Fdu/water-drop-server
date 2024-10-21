@@ -8,6 +8,7 @@ import { ApolloDriver } from '@nestjs/apollo';
 import { OSSModule } from './modules/oss/oss.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { OrganizationModule } from './modules/organization/organization.module';
+import { CourseModule } from './modules/course/course.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import { OrganizationModule } from './modules/organization/organization.module';
     UserModule,
     OSSModule,
     AuthModule,
-    OrganizationModule
+    OrganizationModule,
+    CourseModule
   ],
   controllers: [AppController],
   providers: [AppService],

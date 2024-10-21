@@ -89,4 +89,5 @@ export class Organization extends CommonEntity {
   })
   orgOtherImg?: OrgImage[];
 
+
 }
