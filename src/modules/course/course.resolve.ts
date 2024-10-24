@@ -10,7 +10,7 @@ import { CurUserId } from "@/decorators/current-user.decorator";
 import { DeepPartial, FindOptionsWhere, Like } from "typeorm";
 import { Course } from "./module/course.entity";
 import { Result } from "@/common/dto/result.type";
-import { CourseInput } from "./dto/course.input";
+import { PartialCourseInput } from "./dto/course.input";
 
 @Resolver(() => CourseType)
 @UseGuards(GqlAuthGuard)
@@ -24,18 +24,18 @@ export class CourseResolver {
       return {
         code: SUCCESS,
         data: result,
-        message: '获取成功',
+        message: 'Get course success',
       };
     }
     return {
       code: COURSE_NOT_EXIST,
-      message: '课程信息不存在',
+      message: 'Course not exist',
     };
   }
 
   @Mutation(() => CourseResult)
   async commitCourseInfo(
-    @Args('params') params: CourseInput,
+    @Args('params') params: PartialCourseInput,
     @CurUserId() userId: string,
     @Args('id', { nullable: true }) id: string,
   ): Promise<Result> {
@@ -47,12 +47,12 @@ export class CourseResolver {
       if (res) {
         return {
           code: SUCCESS,
-          message: '创建成功',
+          message: 'create success',
         };
       }
       return {
         code: COURSE_CREATE_FAIL,
-        message: '创建失败',
+        message: 'create fail',
       };
     }
     const course = await this.courseService.findById(id);
@@ -65,17 +65,17 @@ export class CourseResolver {
       if (res) {
         return {
           code: SUCCESS,
-          message: '更新成功',
+          message: 'Update success',
         };
       }
       return {
         code: COURSE_UPDATE_FAIL,
-        message: '更新失败',
+        message: 'Update fail',
       };
     }
     return {
       code: COURSE_NOT_EXIST,
-      message: '课程信息不存在',
+      message: 'Course not exist',
     };
   }
 
@@ -103,7 +103,7 @@ export class CourseResolver {
         pageSize,
         total,
       },
-      message: '获取成功',
+      message: 'Get course list success',
     };
   }
 
@@ -118,17 +118,17 @@ export class CourseResolver {
       if (delRes) {
         return {
           code: SUCCESS,
-          message: '删除成功',
+          message: 'Delete success',
         };
       }
       return {
         code: COURSE_DEL_FAIL,
-        message: '删除失败',
+        message: 'Delete fail',
       };
     }
     return {
       code: COURSE_NOT_EXIST,
-      message: '门店信息不存在',
+      message: 'Store not exist',
     };
   }
 

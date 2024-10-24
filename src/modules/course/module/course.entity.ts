@@ -1,6 +1,7 @@
 import { CommonEntity } from "@/common/entity/common.entity";
 import { IsInt, IsNotEmpty, Min } from "class-validator";
 import { Column, Entity } from "typeorm";
+import { ReducibleTimeType } from "../dto/common.type";
 
 @Entity('course')
 export class Course extends CommonEntity {
@@ -60,4 +61,10 @@ export class Course extends CommonEntity {
     nullable: true,
   })
   otherInfo: string;
+
+  @Column('simple-json', {
+    comment: '可约时间',
+    nullable: true,
+  })
+  reducibleTime: ReducibleTimeType[];
 }
