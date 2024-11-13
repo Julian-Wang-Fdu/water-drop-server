@@ -1,7 +1,9 @@
 import { CommonEntity } from "@/common/entity/common.entity";
 import { IsInt, IsNotEmpty, Min } from "class-validator";
-import { Column, Entity } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import { ReducibleTimeType } from "../dto/common.type";
+import { Organization } from "@/modules/organization/modules/organization.entity";
+import { Card } from "@/modules/card/modules/card.entity";
 
 @Entity('course')
 export class Course extends CommonEntity {
@@ -67,4 +69,12 @@ export class Course extends CommonEntity {
     nullable: true,
   })
   reducibleTime: ReducibleTimeType[];
+
+  @ManyToOne(() => Organization, (org) => org.courses, {
+    cascade: true,
+  })
+  org: Organization;
+
+  @OneToMany(() => Card, (card) => card.course)
+  cards: Card;
 }

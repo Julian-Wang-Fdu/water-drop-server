@@ -201,6 +201,111 @@ type CourseResults {
   page: Page
 }
 
+type CardType {
+  """id"""
+  id: String!
+
+  """名字"""
+  name: String!
+
+  """
+  卡类型 
+       TIME = "time",
+      DURATION = "duration"
+  """
+  type: String!
+
+  """上课次数"""
+  time: Float!
+
+  """有效期 （天）"""
+  validityDay: Float!
+
+  """课程"""
+  course: CourseType!
+}
+
+type CardResult {
+  code: Int!
+  message: String!
+  data: CardType
+}
+
+type CardResults {
+  code: Int!
+  message: String!
+  data: [CardType!]
+  page: Page
+}
+
+type ProductType {
+  id: String!
+  createdAt: DateTime!
+  createdBy: String
+  updatedAt: DateTime
+  updatedBy: String
+  deletedAt: DateTime
+  deletedBy: String
+
+  """名称"""
+  name: String!
+
+  """描述"""
+  desc: String
+
+  """状态"""
+  status: String!
+
+  """距离"""
+  distance: String!
+
+  """分类"""
+  type: String
+
+  """库存总数"""
+  stock: Float!
+
+  """当前库存"""
+  curStock: Float!
+
+  """卖出去多少"""
+  buyNumber: Float!
+
+  """每人限购数量"""
+  limitBuyNumber: Float!
+
+  """封面图"""
+  coverUrl: String!
+
+  """头部banner图"""
+  bannerUrl: String!
+
+  """原价"""
+  originalPrice: Float!
+
+  """优惠价"""
+  preferentialPrice: Float!
+
+  """门店信息"""
+  org: OrganizationType!
+
+  """消费卡"""
+  cards: [CardType!]
+}
+
+type ProductResult {
+  code: Int!
+  message: String!
+  data: ProductType
+}
+
+type ProductResults {
+  code: Int!
+  message: String!
+  data: [ProductType!]
+  page: Page
+}
+
 type Query {
   """use id to find a user"""
   find(id: String!): UserType!
@@ -214,6 +319,10 @@ type Query {
   getOrganizations(page: PageInput!, name: String): OrganizationResults!
   getCourseInfo(id: String!): CourseResult!
   getCourses(page: PageInput!, name: String): CourseResults!
+  getCardInfo(id: String!): CardResult!
+  getCards(courseId: String!, name: String): CardResults!
+  getProductInfo(id: String!): ProductResult!
+  getProducts(page: PageInput!, name: String): ProductResults!
 }
 
 input PageInput {
@@ -237,6 +346,10 @@ type Mutation {
   deleteOrganization(id: String!): Result!
   commitCourseInfo(params: PartialCourseInput!, id: String): CourseResult!
   deleteCourse(id: String!): Result!
+  commitCardInfo(params: CardInput!, courseId: String!, id: String): CardResult!
+  deleteCard(id: String!): Result!
+  commitProductInfo(params: PartialProductInput!, id: String): ProductResult!
+  deleteProduct(id: String!): Result!
 }
 
 input UserInput {
@@ -349,4 +462,53 @@ input OrderTimeInput {
 
   """key"""
   key: Float!
+}
+
+input CardInput {
+  """名字"""
+  name: String!
+
+  """卡类型 次数：time 时长：duration"""
+  type: String!
+
+  """上课次数"""
+  time: Float
+
+  """有效期 （天）"""
+  validityDay: Float!
+}
+
+input PartialProductInput {
+  """名称"""
+  name: String
+
+  """描述"""
+  desc: String
+
+  """状态"""
+  status: String
+
+  """分类"""
+  type: String
+
+  """库存总数"""
+  stock: Float
+
+  """每人限购数量"""
+  limitBuyNumber: Float
+
+  """封面图"""
+  coverUrl: String
+
+  """头部banner图"""
+  bannerUrl: String
+
+  """原价"""
+  originalPrice: Float
+
+  """优惠价"""
+  preferentialPrice: Float
+
+  """消费卡"""
+  cards: [String!]
 }

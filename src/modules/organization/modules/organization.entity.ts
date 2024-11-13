@@ -1,5 +1,8 @@
 import { CommonEntity } from "@/common/entity/common.entity";
+import { Card } from "@/modules/card/modules/card.entity";
+import { Course } from "@/modules/course/module/course.entity";
 import { OrgImage } from "@/modules/orgImage/modules/orgImage.entity";
+import { Product } from "@/modules/product/modules/product.entity";
 import { IsNotEmpty } from "class-validator";
 import { Column, Entity, OneToMany } from "typeorm";
 
@@ -89,5 +92,12 @@ export class Organization extends CommonEntity {
   })
   orgOtherImg?: OrgImage[];
 
+  @OneToMany(() => Course, (course) => course.org)
+  courses: Course[];
 
+  @OneToMany(() => Card, (card) => card.org)
+  cards: Card[];
+
+  @OneToMany(() => Product, (product) => product.org)
+  products: Product[];
 }
