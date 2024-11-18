@@ -1,3 +1,4 @@
+import { CourseType } from "@/modules/course/dto/course.type";
 import { OrgImageInput } from "@/modules/orgImage/dto/orgImage.input";
 import { Field, InputType } from "@nestjs/graphql";
 

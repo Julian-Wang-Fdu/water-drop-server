@@ -3,6 +3,9 @@ import { UserService } from './modules/user/user.service';
 
 @Controller()
 export class AppController {
+  getHello(): any {
+    throw new Error('Method not implemented.');
+  }
   constructor(private readonly userService:UserService){}
 
   //create a administer for test

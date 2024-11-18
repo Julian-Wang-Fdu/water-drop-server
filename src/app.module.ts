@@ -11,6 +11,10 @@ import { OrganizationModule } from './modules/organization/organization.module';
 import { CourseModule } from './modules/course/course.module';
 import { CardModule } from './modules/card/card.module';
 import { ProductModule } from './modules/product/product.module';
+import { CardRecordModule } from './modules/cardRecord/card-record.module';
+import { ScheduleRecordModule } from './modules/schedule-record/schedule-record.module';
+import { StudentModule } from './modules/student/student.module';
+import { ScheduleModule } from './modules/schedule/schedule.module';
 
 @Module({
   imports: [
@@ -23,7 +27,7 @@ import { ProductModule } from './modules/product/product.module';
       database: 'water-drop',
       entities: ['${__dirname}/../modules/**/*.entity{.ts,.js}'],
       logging: true,
-      synchronize: true,
+      synchronize: false,
       autoLoadEntities: true
     }),
     GraphQLModule.forRoot({
@@ -36,7 +40,11 @@ import { ProductModule } from './modules/product/product.module';
     OrganizationModule,
     CourseModule,
     CardModule,
-    ProductModule
+    ProductModule,
+    CardRecordModule,
+    ScheduleRecordModule,
+    ScheduleModule,
+    StudentModule
   ],
   controllers: [AppController],
   providers: [AppService],
